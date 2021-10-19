@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Category\BrandController;
+use App\Http\Controllers\Admin\Category\CouponController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,3 +63,14 @@ Route::get('subcategory/{id}',[SubCategoryController::class,'edit'])->name('edit
 Route::get('delete/subcategory/{id}',[SubCategoryController::class,'delete'])->name('delete.subcategory');
 
 Route::post('update/subcategory/{id}',[SubCategoryController::class,'update'])->name('update.subcategory'); 
+
+//Coupons All
+
+Route::get('admin/coupon',[CouponController::class,'coupon'])->name('admin.coupon'); 
+
+Route::post('admin/store/coupon',[CouponController::class,'store'])->name('store.coupon');
+Route::get('coupon/{id}',[CouponController::class,'edit'])->name('edit.coupon'); 
+
+Route::get('delete/coupon/{id}',[CouponController::class,'delete'])->name('delete.coupon');
+
+Route::post('update/coupon/{id}',[CouponController::class,'update'])->name('update.coupon'); 
