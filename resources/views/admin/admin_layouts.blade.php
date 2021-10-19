@@ -36,6 +36,12 @@
     <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="../lib/rickshaw/rickshaw.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <!--Datatable -->
+    <link href="../lib/highlightjs/github.css" rel="stylesheet">
+    <link href="../lib/datatables/jquery.dataTables.css" rel="stylesheet">
+    <link href="../lib/select2/css/select2.min.css" rel="stylesheet">
+
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="../css/starlight.css">
@@ -72,9 +78,9 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Categroy</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Sub Category</a></li>
-          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Brand</a></li>
+          <li class="nav-item"><a href="{{route('category')}}" class="nav-link">Categroy</a></li>
+          <li class="nav-item"><a href="{{route('subcategory')}}" class="nav-link">Sub Category</a></li>
+          <li class="nav-item"><a href="{{route('brands')}}" class="nav-link">Brand</a></li>
         </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -363,7 +369,36 @@
     <script src="../lib/popper.js/popper.js"></script>
     <script src="../lib/bootstrap/bootstrap.js"></script>
     <script src="../lib/jquery-ui/jquery-ui.js"></script>
-    <script src="../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+   > <script src="../lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script> 
+    <script src="../lib/highlightjs/highlight.pack.js"></script>
+    
+    <script src="../lib/datatables/jquery.dataTables.js"></script>
+    <script src="../lib/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="../lib/select2/js/select2.min.js"></script>
+<script>
+      $(function(){
+        'use strict';
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+        $('#datatable2').DataTable({
+          bLengthChange: false,
+          searching: false,
+          responsive: true
+        });
+
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
+    </script>
     <script src="../lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     <script src="../lib/d3/d3.js"></script>
     <script src="../lib/rickshaw/rickshaw.min.js"></script>
@@ -374,11 +409,13 @@
     <script src="../lib/flot-spline/jquery.flot.spline.js"></script>
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-        <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+        <script src="'https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/starlight.js"></script>
     <script src="../js/ResizeSensor.js"></script>
     <script src="../js/dashboard.js"></script>
-
+   
+   
 
     <script>
         @if(Session::has('messege'))
@@ -404,21 +441,26 @@
          $(document).on("click", "#delete", function(e){
              e.preventDefault();
              var link = $(this).attr("href");
-                swal({
+                Swal.fire({
                   title: "Are you Want to delete?",
                   text: "Once Delete, This will be Permanently Delete!",
                   icon: "warning",
                   buttons: true,
+                   showDenyButton: true,
+                    confirmButtonText: 'Cancel',
+                   denyButtonText: `Ok`,
+                  
                   dangerMode: true,
                 })
                 .then((willDelete) => {
-                  if (willDelete) {
+                  if (willDelete.isDenied) {
                        window.location.href = link;
-                  } else {
-                    swal("Safe Data!");
-                  }
+                  } else if (willDelete.isConfirmed) {
+                       Swal.fire('Changes are not saved', '', 'info')
+                      }
                 });
             });
     </script>
+   
   </body>
 </html>

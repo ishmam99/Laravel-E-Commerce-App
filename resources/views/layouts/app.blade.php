@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../frontend/plugins/slick-1.8.0/slick.css">
 <link rel="stylesheet" type="text/css" href="../frontend/styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="../frontend/styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
 </head>
 
@@ -56,8 +57,8 @@
 							</div>
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="../frontend/images/user.svg" alt=""></div>
-								<div><a href="#">Register</a></div>
-								<div><a href="#">Sign in</a></div>
+								<div><a href="{{route('register')}}">Register</a></div>
+								<div><a href="{{route('login')}}">Sign in</a></div>
 							</div>
 						</div>
 					</div>
@@ -74,7 +75,7 @@
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
-							<div class="logo"><a href="#">OneTech</a></div>
+							<div class="logo"><a href="{{url('/')}}">Amar DUKAN</a></div>
 						</div>
 					</div>
 
@@ -254,7 +255,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../frontend/plugins/slick-1.8.0/slick.js"></script>
 <script src="../frontend/plugins/easing/easing.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="../frontend/js/custom.js"></script>
+<script>
+        @if(Session::has('messege'))
+          var type="{{Session::get('alert-type','info')}}"
+          switch(type){
+              case 'info':
+                   toastr.info("{{ Session::get('messege') }}");
+                   break;
+              case 'success':
+                  toastr.success("{{ Session::get('messege') }}");
+                  break;
+              case 'warning':
+                 toastr.warning("{{ Session::get('messege') }}");
+                  break;
+              case 'error':
+                  toastr.error("{{ Session::get('messege') }}");
+                  break;
+          }
+        @endif
+     </script>  
+
 </body>
 
 </html>
