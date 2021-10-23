@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\LoginController;
 
 use App\Http\Controllers\Admin\Category\CategoryController;
@@ -74,3 +75,11 @@ Route::get('coupon/{id}',[CouponController::class,'edit'])->name('edit.coupon');
 Route::get('delete/coupon/{id}',[CouponController::class,'delete'])->name('delete.coupon');
 
 Route::post('update/coupon/{id}',[CouponController::class,'update'])->name('update.coupon'); 
+
+//Newslater
+Route::get('admin/newslater',[CouponController::class,'newslater'])->name('admin.newslater');
+
+Route::get('delete/subscriber/{id}',[CouponController::class,'delete_sub'])->name('delete.subscriber');
+
+//Front-end
+Route::post('store/newslater',[FrontController::class,'storeNewslater'])->name('store.newslater');
