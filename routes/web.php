@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\LoginController;
-
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Category\BrandController;
@@ -33,7 +33,7 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 //admin routes
 
-Route::get('admin/home', [AdminController::class,'index']);
+Route::get('admin/home', [AdminController::class,'index'])->name('admin');
 Route::get('admin', [LoginController::class,'showLoginForm'])->name('admin.login');
 Route::post('admin', [LoginController::class,'login']);
 Route::get('admin/logout',[AdminController::class,'logout'])->name('admin.logout');
@@ -64,6 +64,8 @@ Route::get('subcategory/{id}',[SubCategoryController::class,'edit'])->name('edit
 Route::get('delete/subcategory/{id}',[SubCategoryController::class,'delete'])->name('delete.subcategory');
 
 Route::post('update/subcategory/{id}',[SubCategoryController::class,'update'])->name('update.subcategory'); 
+//Show sub category via ajax
+Route::get('get/subcategory/{category_id}',[SubCategoryController::class,'getsub']); 
 
 //Coupons All
 
@@ -81,5 +83,18 @@ Route::get('admin/newslater',[CouponController::class,'newslater'])->name('admin
 
 Route::get('delete/subscriber/{id}',[CouponController::class,'delete_sub'])->name('delete.subscriber');
 
+//Product Routes
+Route::get('admin/all',[ProductController::class,'index'])->name('all.product');
+Route::get('admin/add',[ProductController::class,'create'])->name('add.product');
+
+Route::post('admin/store',[ProductController::class,'store'])->name('store.product');
+
+Route::get('product/{id}',[ProductController::class,'edit'])->name('product.edit'); 
+Route::get('inactive/product/{id}',[ProductController::class,'inactive'])->name('product.inactive'); 
+Route::get('active/product/{id}',[ProductController::class,'active'])->name('product.active'); 
+Route::get('delete/product/{id}',[ProductController::class,'delete'])->name('delete.product');
+Route::get('show/{id}',[ProductController::class,'show'])->name('product.show');
+Route::post('product/update/{id}',[ProductController::class,'update'])->name('update.product');
+Route::post('product/updatephoto/{id}',[ProductController::class,'updatephoto'])->name('update.productphoto');
 //Front-end
 Route::post('store/newslater',[FrontController::class,'storeNewslater'])->name('store.newslater');

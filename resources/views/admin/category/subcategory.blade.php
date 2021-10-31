@@ -88,7 +88,7 @@
               <div class="modal-body pd-20">
                
                   <div class="form-group">
-                    <label for="brand">Brand Name</label>
+                    <label for="brand">Sub Category Name</label>
                     <input type="text" class="form-control" placeholder="Sub category Name" name="subcategory_name">
 
                   </div>
