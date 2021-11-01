@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProductController;
+
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
 use App\Http\Controllers\Admin\Category\BrandController;
@@ -96,5 +98,18 @@ Route::get('delete/product/{id}',[ProductController::class,'delete'])->name('del
 Route::get('show/{id}',[ProductController::class,'show'])->name('product.show');
 Route::post('product/update/{id}',[ProductController::class,'update'])->name('update.product');
 Route::post('product/updatephoto/{id}',[ProductController::class,'updatephoto'])->name('update.productphoto');
+//Blog
+Route::get('blog/category-list',[PostController::class,'catList'])->name('add.blog.category.list');
+Route::post('blog/category-list',[PostController::class,'BlogCatStore'])->name('store.blog.category');
+Route::get('blog/category/delete/{id}',[PostController::class,'deleteCategory']);
+Route::get('blog-category-edit/{id}',[PostController::class,'editCategory'])->name('edit.blog.category');
+Route::post('blog/category-list/{id}',[PostController::class,'updateCategory'])->name('update.blog.category');
+Route::get('blog/post',[PostController::class,'post'])->name('add.blog.post');
+Route::get('blog/allpost',[PostController::class,'blogpost'])->name('all.post');
+Route::post('blog/post',[PostController::class,'store'])->name('store.blog');
+Route::get('blog-edit/{id}',[PostController::class,'edit'])->name('post.edit');
+Route::get('delete/post/{id}',[PostController::class,'delete']);
+Route::get('blog/show/{id}',[PostController::class,'show'])->name('post.show');
+Route::post('blog/update/{id}',[PostController::class,'update'])->name('update.blog');
 //Front-end
 Route::post('store/newslater',[FrontController::class,'storeNewslater'])->name('store.newslater');

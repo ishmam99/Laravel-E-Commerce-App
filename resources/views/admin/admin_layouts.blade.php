@@ -100,7 +100,7 @@
         
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
+            <i class="fas fa-cart-plus"></i>
             <span class="menu-item-label">Products</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
@@ -108,6 +108,18 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{route('add.product')}}" class="nav-link">Add Product</a></li>
           <li class="nav-item"><a href="{{route('all.product')}}" class="nav-link">All Products</a></li>
+        </ul>
+        <a href="#" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="fas fa-blog"></i>
+            <span class="menu-item-label">Blog</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{route('add.blog.category.list')}}" class="nav-link">Blog Categpry</a></li>
+          <li class="nav-item"><a href="{{route('add.blog.post')}}" class="nav-link">Add Post</a></li>
+         <li class="nav-item"><a href="{{route('all.post')}}" class="nav-link">Post List</a></li>
         </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -383,6 +395,20 @@
 
         // Summernote editor
         $('#summernote').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
+    <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote2').summernote({
           height: 150,
           tooltip: false
         })
