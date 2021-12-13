@@ -27,11 +27,13 @@ Route::get('/', function () {
     return view('pages.index');
 }); 
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
+Route::get('/change/password',[HomeController::class,'ChangePassword'])->name('password.change');
+Route::post('/update/password',[HomeController::class,'UpdatePassword'])->name('password.update');
 
 //admin routes
 
@@ -113,3 +115,6 @@ Route::get('blog/show/{id}',[PostController::class,'show'])->name('post.show');
 Route::post('blog/update/{id}',[PostController::class,'update'])->name('update.blog');
 //Front-end
 Route::post('store/newslater',[FrontController::class,'storeNewslater'])->name('store.newslater');
+//wishlist
+Route::get('add/wishlist/{id}',[App\Http\Controllers\WishlistController::class,'add']);
+Route::get('add/cart/{id}',[App\Http\Controllers\WishlistController::class,'addCart']);

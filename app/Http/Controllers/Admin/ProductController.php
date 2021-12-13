@@ -20,7 +20,7 @@ class ProductController extends Controller
                             ->select('products.*','categories.category_name','brands.brand_name')
                             ->get();
 
-     
+   
         return view('admin.product.index',compact('product'));
     }
     public function create()
@@ -35,6 +35,7 @@ class ProductController extends Controller
         $data['product_name']=$request->product_name;
         $data['product_code']=$request->product_code;
         $data['product_quantity']=$request->product_quantity;
+        $data['discount_price']=$request->discount_price;
         $data['category_id']=$request->category_id;
         $data['subcategory_id']=$request->subcategory_id;
         $data['brand_id']=$request->brand_id;

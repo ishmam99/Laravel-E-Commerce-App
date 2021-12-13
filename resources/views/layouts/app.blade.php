@@ -6,14 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="OneTech shop project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="../frontend/styles/bootstrap4/bootstrap.min.css">
-<link href="../frontend/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="../frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="../frontend/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="../frontend/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="../frontend/plugins/slick-1.8.0/slick.css">
-<link rel="stylesheet" type="text/css" href="../frontend/styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="../frontend/styles/responsive.css">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/styles/bootstrap4/bootstrap.min.css')}}">
+<link href="{{asset('/frontend/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/plugins/OwlCarousel2-2.2.1/animate.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/plugins/slick-1.8.0/slick.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/styles/main_styles.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('/frontend/styles/responsive.css')}}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
 </head>
@@ -45,20 +45,28 @@
 											<li><a href="#">Japanese</a></li>
 										</ul>
 									</li>
+									@if (Auth::user())
 									<li>
-										<a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
+											
+										<a href="{{route('home')}}">	<div class="user_icon"><img src="../frontend/images/user.svg" alt=""></div> Profile<i class="fas fa-chevron-down"></i></a>
 										<ul>
 											<li><a href="#">EUR Euro</a></li>
 											<li><a href="#">GBP British Pound</a></li>
-											<li><a href="#">JPY Japanese Yen</a></li>
+											<li><a href="{{route('logout')}}">Sign Out</a></li>
 										</ul>
 									</li>
+									@endif
 								</ul>
 							</div>
-							<div class="top_bar_user">
+							<div class="top_bar_user">@if (!Auth::user())
 								<div class="user_icon"><img src="../frontend/images/user.svg" alt=""></div>
-								<div><a href="{{route('register')}}">Register</a></div>
-								<div><a href="{{route('login')}}">Sign in</a></div>
+								
+									
+								<div><a href="{{route('login')}}">Sign in</a></div>	
+								
+									
+								@endif
+								
 							</div>
 						</div>
 					</div>
@@ -90,13 +98,13 @@
 											<div class="custom_dropdown_list">
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
 												<i class="fas fa-chevron-down"></i>
+												<?php $cat=DB::table('categories')->get(); ?>
 												<ul class="custom_list clc">
-													<li><a class="clc" href="#">All Categories</a></li>
-													<li><a class="clc" href="#">Computers</a></li>
-													<li><a class="clc" href="#">Laptops</a></li>
-													<li><a class="clc" href="#">Cameras</a></li>
-													<li><a class="clc" href="#">Hardware</a></li>
-													<li><a class="clc" href="#">Smartphones</a></li>
+													@foreach ($cat as $item)
+														<li><a class="clc" href="#">{{$item->category_name}}</a></li>
+													@endforeach
+													
+													
 												</ul>
 											</div>
 										</div>
@@ -112,9 +120,10 @@
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_icon"><img src="../frontend/images/heart.png" alt=""></div>
+								<?php $wishlist=DB::table('wishlists')->count('id')?>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#">Wishlist</a></div>
-									<div class="wishlist_count">115</div>
+									<div class="wishlist_count"><span>{{$wishlist}}</span></div>
 								</div>
 							</div>
 
@@ -244,19 +253,105 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</div>
 </div>
 
-<script src="../frontend/js/jquery-3.3.1.min.js"></script>
-<script src="../frontend/styles/bootstrap4/popper.js"></script>
-<script src="../frontend/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="../frontend/plugins/greensock/TweenMax.min.js"></script>
-<script src="../frontend/plugins/greensock/TimelineMax.min.js"></script>
-<script src="../frontend/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="../frontend/plugins/greensock/animation.gsap.min.js"></script>
-<script src="../frontend/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="../frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="../frontend/plugins/slick-1.8.0/slick.js"></script>
-<script src="../frontend/plugins/easing/easing.js"></script>
+<script src="{{asset('/frontend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('/frontend/styles/bootstrap4/popper.js')}}"></script>
+<script src="{{asset('/frontend/styles/bootstrap4/bootstrap.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('/frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('/frontend/plugins/slick-1.8.0/slick.js')}}"></script>
+<script src="{{asset('/frontend/plugins/easing/easing.js')}}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="../frontend/js/custom.js"></script>
+<script src="{{asset('/frontend/js/custom.js')}}"></script>
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+	$(document).ready(function(){
+		$('.addcart').on('click',function(){
+			var id=$(this).data('id');
+			if(id){
+				$.ajax({
+					url:"{{url('add/cart/')}}/"+id,
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000,
+							timerProgressBar: true,
+							didOpen: (toast) => {
+								toast.addEventListener('mouseenter', Swal.stopTimer)
+								toast.addEventListener('mouseleave', Swal.resumeTimer)
+							}
+							})
+							if($.isEmptyObject(data.error)){
+							Toast.fire({
+							icon: 'success',
+							title: data.success
+							})}
+							else{
+								Toast.fire({
+							icon: 'error',
+							title: data.error
+							})
+							} 
+					},
+				});
+			}else{
+				alert('danger');
+			}
+		});
+	});
+</script>
+
+
+<script>
+
+	$(document).ready(function(){
+		$('.addwishlist').on('click',function(){
+			var id=$(this).data('id');
+			if(id){
+				$.ajax({
+					url:"{{url('add/wishlist/')}}/"+id,
+					type:"GET",
+					dataType:"json",
+					success:function(data){
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000,
+							timerProgressBar: true,
+							didOpen: (toast) => {
+								toast.addEventListener('mouseenter', Swal.stopTimer)
+								toast.addEventListener('mouseleave', Swal.resumeTimer)
+							}
+							})
+							if($.isEmptyObject(data.error)){
+							Toast.fire({
+							icon: 'success',
+							title: data.success
+							})}
+							else{
+								Toast.fire({
+							icon: 'error',
+							title: data.error
+							})
+							} 
+					},
+				});
+			}else{
+				alert('danger');
+			}
+		});
+	});
+</script>
 <script>
         @if(Session::has('messege'))
           var type="{{Session::get('alert-type','info')}}"
